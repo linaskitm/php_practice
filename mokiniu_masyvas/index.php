@@ -1,146 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Mokiniai</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
 <?php
-$data = [
-    '5a' =>[
-        rand(1,100) =>[
-            'Ona',
-            'Onute',
-            'koliai' => [
-                'math' => 6,
-                'it' => 7,
-                'engish' => 10
-            ],
-            date("Y-m-d")
 
-        ],
-        rand(1,100) =>[
-            'Ona',
-            'Onute',
-            'koliai' => [
-                'math' => 6,
-                'it' => 7,
-                'engish' => 10
-            ],
-            date("Y-m-d")
+include 'data.php';
 
-        ],
-        rand(1,100) =>[
-            'Ona',
-            'Onute',
-            'koliai' => [
-                'math' => 6,
-                'it' => 7,
-                'engish' => 10
-            ],
-            date("Y-m-d")
-
-        ],
-        rand(1,100) =>[
-            'Ona',
-            'Onute',
-            'koliai' => [
-                'math' => 6,
-                'it' => 7,
-                'engish' => 10
-            ],
-            date("Y-m-d")
-
-        ],
-        rand(1,100) =>[
-            'Ona',
-            'Onute',
-            'koliai' => [
-                'math' => 6,
-                'it' => 7,
-                'engish' => 10
-            ],
-            date("Y-m-d")
-
-        ],
-
-    ],
-    '5b' =>[
-       rand(1,100) =>[
-            'Petras',
-            'Petraitis',
-            'koliai' => [
-                'math' => 6,
-                'it' => 7,
-                'engish' => 10
-            ],
-            date("Y-m-d")
-
-        ],
-             rand(1,100) =>[
-            'Petras',
-            'Petraitis',
-            'koliai' => [
-                'math' => 6,
-                'it' => 7,
-                'engish' => 10
-            ],
-            date("Y-m-d")
-
-        ],
-        rand(1,100) =>[
-            'Petras',
-            'Petraitis',
-            'koliai' => [
-                'math' => 6,
-                'it' => 7,
-                'engish' => 10
-            ],
-            date("Y-m-d")
-
-        ],
-         rand(1,100) =>[
-            'Petras',
-            'Petraitis',
-            'koliai' => [
-               'math' => 6,
-                'it' => 7,
-                'engish' => 10
-            ],
-            date("Y-m-d")
-
-        ],
-             rand(1,100) =>[
-            'Petras',
-            'Petraitis',
-            'koliai' => [
-                'math' => 6,
-                'it' => 7,
-                'engish' => 10
-            ],
-            date("Y-m-d")
-
-        ],
-    ]
-];
-
-//foreach ($data as $key => $value) {
-//    echo $key;
-//    //echo $value;
-//    foreach ($value as $key => $val){
-//        echo " " . $key . " ";
-//        foreach ($val as $v) {
-//            echo $v;
-//        }
-//
-//        }
-//    }
 ?>
 
-<table>
+<table class="styled-table">
+    <thead>
     <tr>
-        <th>Klase</th>
-        <th>Kodas</th>
-        <th>Vardas</th>
-        <th>Pavarde</th>
-        <th>Vidurkis</th>
-        <th>Data</th>
+        <th >Klase</th>
+        <th >Kodas</th>
+        <th >Vardas</th>
+        <th >Pavarde</th>
+        <th >Vidurkis</th>
+        <th >Data</th>
     </tr>
+    </thead>
     <?php foreach ($data as $key => $value):?>
         <?php foreach ($value as $key2 => $val):?>
+
+    <tbody>
     <tr>
         <td><?=$key;?></td>
         <td><?=$key2;?></td>
@@ -152,11 +39,15 @@ $data = [
                 <?php endif; ?>
                 <!--  check if value is array and loop the value  -->
                 <?php if (is_array($v) && !empty($v)): ?>
-                    <td><?= array_sum($v) / count($v); ?></td>
+                    <td><?= round(array_sum($v) / count($v), 1); ?></td>
                 <?php endif; ?>
             <?php endforeach;?>
 
     </tr>
         <?php endforeach;?>
     <?php endforeach;?>
+
+</tbody>
 </table>
+</body>
+</html>
