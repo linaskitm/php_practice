@@ -26,9 +26,9 @@
             if(!preg_match('/^[A-Za-z0-9]{0,500}$/', $_POST['message'])){
                 $validation[] = 'Zinute negali virsyti 500 simboliu';
             }
-        if(!preg_match('/^[0-9]{11}$/', $_POST['idcode'])){
-            $validation[] = 'Iveskite tinkama asmens koda';
-        }
+            if(!preg_match('/^[+0-9. ()-]{8,13}$/ui', $_POST['phone'])){
+                $validation[] = 'Iveskite tinkama telefono numeri';
+            }
 
         ?>
 
@@ -44,15 +44,15 @@
             <div class="row">
                 <div class="col-md-6">
                     <div class="card-body ">
-                        <span><?=date(DATE_RFC2822);?></span>
+                        <span><?=date("F j, Y, g:i a");?></span>
                         <h4 class="card-title">
                             <span>Departure: </span>
                             <?=htmlspecialchars(ucfirst($_POST['from']));?></h4>
-                        <span><?=date(DATE_RFC2822);?></span>
+                        <span><?=date("F j, Y, g:i a");?></span>
                         <h4 class="card-title">
                             <span>Arrival: </span>
                             <?=htmlspecialchars(ucfirst($_POST['where']));?></h4>
-                        <p class="card-text"><span>Bagazas: </span><?=($_POST['luggage']);?>kg </p>
+                        <p class="card-text"><span>Bagazas: </span><?=($_POST['luggage']);?> </p>
                     </div>
                 </div>
                 <div class="col-md-5">
@@ -73,15 +73,18 @@
                         <?php if($_POST['luggage'] >= 20):?>
                             <li class="list-group-item">
                                 <span>Moketina suma: </span>
-                                <?php $addition = $_POST['price'] + 30;?>
-                                <?= $addition;?> Eur
+                                <?php (float)$addition = (float) $_POST['price'] + 30;?>
+                                <?= number_format($addition, 2);?> Eur
                             </li>
-                        <?php endif;?>
-                        <?else:?>
+
+
+                        <?php else:?>
                             <li class="list-group-item">
                                 <span>Moketina suma: </span>
-                                <?= $_POST['price'];?> Eur
+                                <?= number_format((float) $_POST['price'], 2);?> Eur
                             </li>
+                        <?php endif;?>
+
                     </ul>
                 </div>
             </div>
@@ -108,6 +111,11 @@
         <div class="form-group">
             <label for="idcode">Asmens kodas</label>
             <input type="number" class="form-control" id="idcode" name="idcode" placeholder="Asmens koda sudaro 11 skaitmenu.">
+
+        </div>
+        <div class="form-group">
+            <label for="phone">Tel. Nr.</label>
+            <input type="number" class="form-control" id="phone" name="phone" placeholder="+370">
 
         </div>
         <div class="form-group">
