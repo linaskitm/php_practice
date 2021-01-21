@@ -1,0 +1,1 @@
+Linas,Pelenis,lpelenis@gmail.com,password,finance,Versija1,/nLinas,Pelenis,linaspelenis@yahoo.com,password,real-estate,Versija2,/nLukas,Pelenis,lukaspelenis@yaho.com,passwd,sales,Versija3,/nLinas,Pelenis,dssd@one.com,passwd,educational,versija4,/n
