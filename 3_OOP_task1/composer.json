@@ -1,0 +1,10 @@
+{
+    "autoload": {
+      "name": "Users demo",
+      "description": "description",
+      "psr-4": {
+        "Transports\\": "app"
+      }
+  }
+
+}

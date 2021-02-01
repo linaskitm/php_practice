@@ -1,4 +1,6 @@
 <?php
+
+
 ?>
 
 <html lang="en">
@@ -12,6 +14,13 @@
     <link rel="stylesheet" href="css/bootstrap.min.css">
 
 </head>
+
+<div class="modal">
+    <?php
+    require '_partials/ticket.php';
+
+    ?>
+</div>
 
 <body>
 <nav class="pb-5">
@@ -28,19 +37,76 @@
 <h2 class="text-center pb-5"> Skrydžių rezervacijos</h2>
 
 <?php
+
+
 function printTable() { // print to UI from zinutes.txt
     $newArray = explode("/n", file_get_contents('../data/flights.txt'));
     foreach ($newArray as $arr) {
         $arr = explode(",", $arr);
         echo "<tr></tr>";
+
         foreach ($arr as $a) {
             echo "<td>$a</td>";
         }
     }
 }
+//--------------- bandymas gauti irasus pagal srydzio numeri-----
+function fligthNumer1() {
+    return $number = 'FR2971';
+}
+function printOneFlight($name){
+    $newArray = explode("/n", file_get_contents('../data/flights.txt'));
+    foreach ($newArray as $arr) {
+        $arr = explode(",", $arr);
+
+        if(($arr[5] == 'FR2971'))
+        foreach ($arr as $a) {
+            echo "<td>$a</td>";
+        }
+    }
+}
+$flight_numbers = [
+    'FR2971',
+    'W61643',
+    'W61645',
+    'W68144',
+    'W95115'];
+
+function search()
+{
+    $flights = file_get_contents('../data/flights.txt', true);
+    $flights = explode('/n', $flights);
+    foreach ($flights as $flight) {
+        echo "<table><tr>";
+        $array = explode(',', $flight);
+        foreach ($array as $value) {
+            echo "<td>$value</td>";
+        }
+        echo "</tr></table";
+    }
+}
+
 ?>
+
+
+
 <div class="container-fluid">
     <div class="m-2">
+
+        <form method="post">
+        <div class='form-group row d-flex justify-content-center'>
+            <select name="search-flight" class="form-control col-7">
+                <option selected disabled>Ieškoti pagal skrydžio nr</option>
+                <?php foreach ($flight_numbers as $number): ?>
+                    <option value="<?= $number; ?>"><?= $number; ?></option>
+                <?php endforeach; ?>
+            </select>
+            <button name='search-btn' id='search-btn'
+                    class='ml-2 btn btn-primary text-center col-lg-1 col-md-2 col-3' type="submit">Ieškoti
+            </button>
+        </div>
+        </form>
+
         <table class="table">
             <thead>
             <tr>
@@ -59,7 +125,16 @@ function printTable() { // print to UI from zinutes.txt
             </thead>
             <tbody>
             <?php printTable(); ?>
+
         </tbody>
+        </table>
+        <?php if (isset($_POST['search-btn'])): ?>
+            <?php if ($_POST['search-flight'] != $_POST['flight-no']) {
+                echo  'nera';
+            } ?>
+        <?php else: ?>
+           <?php search();?>
+        <?php endif; ?>
     </div>
 </div>
 

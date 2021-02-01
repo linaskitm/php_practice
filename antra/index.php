@@ -39,8 +39,7 @@ $data = [
                 </ul>
                 </li>
             </ul>
+            <?php endforeach;?>
         </li>
-
-        <?php endforeach;?>
     <?php endforeach;?>
 </ul>
